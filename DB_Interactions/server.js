@@ -5,24 +5,19 @@ const userVerification = require("./userVerification");
 
 const app = express();
 
+app.use(
+  cors({
+    origin: process.env.FEBaseURL,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.json());
 app.use("/auth", userVerification);
 
-app.use(cors()
-//   cors({
-//     origin: process.env.FeBaseURL,
-//     methods: ["GET", "POST"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-);
-
 app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.post("/login", (req, res) => {
-  console.log(req.body);
-  res.send("Success");
+  res.send("Hello World!, This is the Local Server on PORT: 3000");
 });
 
 const port = process.env.PORT;
